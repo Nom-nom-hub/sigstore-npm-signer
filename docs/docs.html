@@ -16,6 +16,9 @@
       <img src="assets/logo.svg" alt="sigstore-npm-signer logo">
       <span>sigstore-npm-signer</span>
     </div>
+    <button id="menu-toggle" class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
     <nav class="header-nav">
       <a href="index.html">
         <i class="fas fa-home"></i> Home
@@ -41,7 +44,7 @@
           <li><a href="#development">Development</a></li>
         </ul>
       </div>
-      
+
       <div class="sidebar-section">
         <div class="sidebar-title">Resources</div>
         <ul class="sidebar-nav">
@@ -55,10 +58,10 @@
 
     <main class="content">
       <h1>sigstore-npm-signer Documentation</h1>
-      
+
       <section id="usage">
         <h2>Usage</h2>
-        
+
         <h3>Signing a Package</h3>
         <p>The <code>publish</code> command signs your npm package tarball and updates the package.json with the signature:</p>
         <pre><code># Sign and publish a package using the default tarball path
@@ -69,7 +72,7 @@ npx sigstore-npm-signer publish --tarball your-package-1.0.0.tgz
 
 # Specify custom Sigstore service URLs
 npx sigstore-npm-signer publish --fulcio-url https://custom-fulcio.example.com --rekor-url https://custom-rekor.example.com</code></pre>
-        
+
         <h3>Verifying a Package</h3>
         <p>The <code>verify</code> command verifies the signature of an npm package:</p>
         <pre><code># Verify a package using the default tarball path
@@ -80,7 +83,7 @@ npx sigstore-npm-signer verify --tarball your-package-1.0.0.tgz
 
 # Specify custom Sigstore service URLs
 npx sigstore-npm-signer verify --fulcio-url https://custom-fulcio.example.com --rekor-url https://custom-rekor.example.com</code></pre>
-        
+
         <h3>Command Line Options</h3>
         <table>
           <thead>
@@ -113,14 +116,14 @@ npx sigstore-npm-signer verify --fulcio-url https://custom-fulcio.example.com --
       <section id="configuration">
         <h2>Configuration</h2>
         <p>You can configure <code>sigstore-npm-signer</code> by creating a <code>.signerrc</code> file in your project root:</p>
-        
+
         <pre><code>{
   "allowedPublishers": ["github:username", "email@example.com"],
   "enforceVerification": true,
   "fulcioUrl": "https://fulcio.example.com",
   "rekorUrl": "https://rekor.example.com"
 }</code></pre>
-        
+
         <h3>Configuration Options</h3>
         <table>
           <thead>
@@ -162,7 +165,7 @@ npx sigstore-npm-signer verify --fulcio-url https://custom-fulcio.example.com --
 
       <section id="api">
         <h2>API Reference</h2>
-        
+
         <h3>Signing</h3>
         <p>The <code>signPackage</code> function signs a package tarball:</p>
         <pre><code>import { signPackage } from 'sigstore-npm-signer';
@@ -173,7 +176,7 @@ const signature = await signPackage({
   fulcioUrl: 'https://fulcio.example.com', // optional
   rekorUrl: 'https://rekor.example.com'    // optional
 });</code></pre>
-        
+
         <h4>Parameters</h4>
         <table>
           <thead>
@@ -205,17 +208,17 @@ const signature = await signPackage({
             </tr>
           </tbody>
         </table>
-        
+
         <h4>Returns</h4>
         <p><code>Promise&lt;string&gt;</code> - The signature as a string</p>
-        
+
         <h3>Attaching Signatures</h3>
         <p>The <code>attachSignature</code> function attaches a signature to a package.json:</p>
         <pre><code>import { attachSignature } from 'sigstore-npm-signer';
 
 // Attach a signature to a package.json
 await attachSignature(packageJson, signature);</code></pre>
-        
+
         <h4>Parameters</h4>
         <table>
           <thead>
@@ -241,7 +244,7 @@ await attachSignature(packageJson, signature);</code></pre>
             </tr>
           </tbody>
         </table>
-        
+
         <h3>Verification</h3>
         <p>The <code>verifyPackage</code> function verifies a package signature:</p>
         <pre><code>import { verifyPackage } from 'sigstore-npm-signer';
@@ -253,7 +256,7 @@ await verifyPackage({
   fulcioUrl: 'https://fulcio.example.com', // optional
   rekorUrl: 'https://rekor.example.com'    // optional
 });</code></pre>
-        
+
         <h4>Parameters</h4>
         <table>
           <thead>
@@ -291,36 +294,36 @@ await verifyPackage({
             </tr>
           </tbody>
         </table>
-        
+
         <h4>Returns</h4>
         <p><code>Promise&lt;void&gt;</code> - Resolves if verification succeeds, rejects if it fails</p>
       </section>
 
       <section id="how-it-works">
         <h2>How It Works</h2>
-        
+
         <h3>Signing Process</h3>
         <ol>
           <li>The package tarball is hashed using SHA-256</li>
           <li>The hash is signed using Sigstore's keyless signing infrastructure</li>
           <li>The signature is attached to the package.json file</li>
         </ol>
-        
+
         <p>The signing process uses Sigstore's OIDC-based keyless signing, which means you don't need to manage any private keys. Instead, Sigstore uses your identity (e.g., GitHub identity) to issue a short-lived certificate that's used for signing.</p>
-        
+
         <h3>Verification Process</h3>
         <ol>
           <li>The package tarball is hashed using SHA-256</li>
           <li>The signature from package.json is verified against the hash</li>
           <li>The verification uses Sigstore's transparency log to ensure authenticity</li>
         </ol>
-        
+
         <p>The verification process checks that the package was signed by an authorized publisher and that the package hasn't been tampered with since it was signed.</p>
       </section>
 
       <section id="development">
         <h2>Development</h2>
-        
+
         <h3>Setup</h3>
         <pre><code># Clone the repository
 git clone https://github.com/yourusername/sigstore-npm-signer.git
@@ -334,11 +337,11 @@ npm run build
 
 # Run tests
 npm test</code></pre>
-        
+
         <h3>Testing</h3>
         <p>The project uses Jest for testing and maintains 100% code coverage:</p>
         <pre><code>npm test</code></pre>
-        
+
         <h3>Contributing</h3>
         <p>Contributions are welcome! Please feel free to submit a Pull Request.</p>
         <ol>
@@ -357,34 +360,6 @@ npm test</code></pre>
     </main>
   </div>
 
-  <script>
-    // Simple script to highlight the active section in the sidebar
-    document.addEventListener('DOMContentLoaded', function() {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.sidebar-nav a');
-      
-      function highlightNavigation() {
-        const scrollPosition = window.scrollY;
-        
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - 100;
-          const sectionHeight = section.offsetHeight;
-          const sectionId = section.getAttribute('id');
-          
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === `#${sectionId}`) {
-                link.classList.add('active');
-              }
-            });
-          }
-        });
-      }
-      
-      window.addEventListener('scroll', highlightNavigation);
-      highlightNavigation();
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

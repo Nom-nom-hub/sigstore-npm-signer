@@ -16,6 +16,9 @@
       <img src="assets/logo.svg" alt="sigstore-npm-signer logo">
       <span>sigstore-npm-signer</span>
     </div>
+    <button id="menu-toggle" class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
     <nav class="header-nav">
       <a href="https://github.com/yourusername/sigstore-npm-signer" target="_blank">
         <i class="fab fa-github"></i> GitHub
@@ -39,7 +42,7 @@
           <li><a href="#quick-start">Quick Start</a></li>
         </ul>
       </div>
-      
+
       <div class="sidebar-section">
         <div class="sidebar-title">Documentation</div>
         <ul class="sidebar-nav">
@@ -49,7 +52,7 @@
           <li><a href="docs.html#how-it-works">How It Works</a></li>
         </ul>
       </div>
-      
+
       <div class="sidebar-section">
         <div class="sidebar-title">Resources</div>
         <ul class="sidebar-nav">
@@ -80,20 +83,20 @@
       <section id="overview">
         <h2>Overview</h2>
         <p><code>sigstore-npm-signer</code> provides a seamless way to integrate Sigstore's keyless signing and verification capabilities with your npm packages. This helps ensure the integrity and authenticity of packages throughout the software supply chain.</p>
-        
+
         <div class="features">
           <div class="feature">
             <div class="feature-icon"><i class="fas fa-key"></i></div>
             <h3>Keyless Signing</h3>
             <p>Sign npm packages without managing private keys, using Sigstore's keyless signing infrastructure.</p>
           </div>
-          
+
           <div class="feature">
             <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
             <h3>Verification</h3>
             <p>Verify package signatures during installation to ensure package integrity and authenticity.</p>
           </div>
-          
+
           <div class="feature">
             <div class="feature-icon"><i class="fas fa-cogs"></i></div>
             <h3>CI/CD Integration</h3>
@@ -106,30 +109,30 @@
         <h2>Installation</h2>
         <p>You can install <code>sigstore-npm-signer</code> globally:</p>
         <pre><code>npm install -g sigstore-npm-signer</code></pre>
-        
+
         <p>Or as a project dependency:</p>
         <pre><code>npm install sigstore-npm-signer</code></pre>
-        
+
         <p><strong>Requirements:</strong> Node.js ≥ 18.17.0</p>
       </section>
 
       <section id="quick-start">
         <h2>Quick Start</h2>
-        
+
         <h3>Signing a Package</h3>
         <pre><code># Sign and publish a package
 npx sigstore-npm-signer publish
 
 # Optionally specify a tarball path
 npx sigstore-npm-signer publish --tarball your-package-1.0.0.tgz</code></pre>
-        
+
         <h3>Verifying a Package</h3>
         <pre><code># Verify a package
 npx sigstore-npm-signer verify
 
 # Optionally specify a tarball path
 npx sigstore-npm-signer verify --tarball your-package-1.0.0.tgz</code></pre>
-        
+
         <p>For more detailed usage instructions, configuration options, and API reference, check out the <a href="docs.html">full documentation</a>.</p>
       </section>
 
@@ -140,34 +143,6 @@ npx sigstore-npm-signer verify --tarball your-package-1.0.0.tgz</code></pre>
     </main>
   </div>
 
-  <script>
-    // Simple script to highlight the active section in the sidebar
-    document.addEventListener('DOMContentLoaded', function() {
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.sidebar-nav a');
-      
-      function highlightNavigation() {
-        const scrollPosition = window.scrollY;
-        
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop - 100;
-          const sectionHeight = section.offsetHeight;
-          const sectionId = section.getAttribute('id');
-          
-          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === `#${sectionId}`) {
-                link.classList.add('active');
-              }
-            });
-          }
-        });
-      }
-      
-      window.addEventListener('scroll', highlightNavigation);
-      highlightNavigation();
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
