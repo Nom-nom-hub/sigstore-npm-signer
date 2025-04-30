@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sigstore-npm-signer - Sign and verify npm packages using Sigstore</title>
+  <meta name="description" content="A tool for signing and verifying npm packages using Sigstore for enhanced supply chain security.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/favicon.ico">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-logo">
+      <img src="assets/logo.svg" alt="sigstore-npm-signer logo">
+      <span>sigstore-npm-signer</span>
+    </div>
+    <nav class="header-nav">
+      <a href="https://github.com/yourusername/sigstore-npm-signer" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.npmjs.com/package/sigstore-npm-signer" target="_blank">
+        <i class="fab fa-npm"></i> npm
+      </a>
+      <a href="docs.html">
+        <i class="fas fa-book"></i> Documentation
+      </a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Getting Started</div>
+        <ul class="sidebar-nav">
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#installation">Installation</a></li>
+          <li><a href="#quick-start">Quick Start</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-title">Documentation</div>
+        <ul class="sidebar-nav">
+          <li><a href="docs.html#usage">Usage</a></li>
+          <li><a href="docs.html#configuration">Configuration</a></li>
+          <li><a href="docs.html#api">API Reference</a></li>
+          <li><a href="docs.html#how-it-works">How It Works</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-title">Resources</div>
+        <ul class="sidebar-nav">
+          <li><a href="https://www.sigstore.dev/" target="_blank">Sigstore</a></li>
+          <li><a href="https://github.com/yourusername/sigstore-npm-signer" target="_blank">GitHub Repository</a></li>
+          <li><a href="https://www.npmjs.com/package/sigstore-npm-signer" target="_blank">npm Package</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero">
+        <h1>sigstore-npm-signer</h1>
+        <p>Sign and verify npm packages using Sigstore for enhanced supply chain security</p>
+        <div>
+          <a href="#quick-start" class="btn">Get Started</a>
+          <a href="https://github.com/yourusername/sigstore-npm-signer" class="btn btn-secondary" target="_blank">View on GitHub</a>
+        </div>
+      </section>
+
+      <div class="badges">
+        <img class="badge" src="https://img.shields.io/npm/v/sigstore-npm-signer.svg" alt="npm version">
+        <img class="badge" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License">
+        <img class="badge" src="https://img.shields.io/badge/coverage-100%25-brightgreen.svg" alt="Test Coverage">
+        <img class="badge" src="https://img.shields.io/node/v/sigstore-npm-signer.svg" alt="Node.js Version">
+      </div>
+
+      <section id="overview">
+        <h2>Overview</h2>
+        <p><code>sigstore-npm-signer</code> provides a seamless way to integrate Sigstore's keyless signing and verification capabilities with your npm packages. This helps ensure the integrity and authenticity of packages throughout the software supply chain.</p>
+        
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon"><i class="fas fa-key"></i></div>
+            <h3>Keyless Signing</h3>
+            <p>Sign npm packages without managing private keys, using Sigstore's keyless signing infrastructure.</p>
+          </div>
+          
+          <div class="feature">
+            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>Verification</h3>
+            <p>Verify package signatures during installation to ensure package integrity and authenticity.</p>
+          </div>
+          
+          <div class="feature">
+            <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+            <h3>CI/CD Integration</h3>
+            <p>Easily integrate with CI/CD pipelines for automated signing and verification.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="installation">
+        <h2>Installation</h2>
+        <p>You can install <code>sigstore-npm-signer</code> globally:</p>
+        <pre><code>npm install -g sigstore-npm-signer</code></pre>
+        
+        <p>Or as a project dependency:</p>
+        <pre><code>npm install sigstore-npm-signer</code></pre>
+        
+        <p><strong>Requirements:</strong> Node.js ≥ 18.17.0</p>
+      </section>
+
+      <section id="quick-start">
+        <h2>Quick Start</h2>
+        
+        <h3>Signing a Package</h3>
+        <pre><code># Sign and publish a package
+npx sigstore-npm-signer publish
+
+# Optionally specify a tarball path
+npx sigstore-npm-signer publish --tarball your-package-1.0.0.tgz</code></pre>
+        
+        <h3>Verifying a Package</h3>
+        <pre><code># Verify a package
+npx sigstore-npm-signer verify
+
+# Optionally specify a tarball path
+npx sigstore-npm-signer verify --tarball your-package-1.0.0.tgz</code></pre>
+        
+        <p>For more detailed usage instructions, configuration options, and API reference, check out the <a href="docs.html">full documentation</a>.</p>
+      </section>
+
+      <footer class="footer">
+        <p>sigstore-npm-signer is licensed under the <a href="https://opensource.org/licenses/Apache-2.0" target="_blank">Apache License 2.0</a>.</p>
+        <p>© 2023 sigstore-npm-signer Contributors</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Simple script to highlight the active section in the sidebar
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.sidebar-nav a');
+      
+      function highlightNavigation() {
+        const scrollPosition = window.scrollY;
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', highlightNavigation);
+      highlightNavigation();
+    });
+  </script>
+</body>
+</html>

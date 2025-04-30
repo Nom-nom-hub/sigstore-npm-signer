@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation - sigstore-npm-signer</title>
+  <meta name="description" content="Comprehensive documentation for sigstore-npm-signer, a tool for signing and verifying npm packages using Sigstore.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="assets/favicon.ico">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-logo">
+      <img src="assets/logo.svg" alt="sigstore-npm-signer logo">
+      <span>sigstore-npm-signer</span>
+    </div>
+    <nav class="header-nav">
+      <a href="index.html">
+        <i class="fas fa-home"></i> Home
+      </a>
+      <a href="https://github.com/yourusername/sigstore-npm-signer" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="https://www.npmjs.com/package/sigstore-npm-signer" target="_blank">
+        <i class="fab fa-npm"></i> npm
+      </a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Documentation</div>
+        <ul class="sidebar-nav">
+          <li><a href="#usage">Usage</a></li>
+          <li><a href="#configuration">Configuration</a></li>
+          <li><a href="#api">API Reference</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#development">Development</a></li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-section">
+        <div class="sidebar-title">Resources</div>
+        <ul class="sidebar-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="https://www.sigstore.dev/" target="_blank">Sigstore</a></li>
+          <li><a href="https://github.com/yourusername/sigstore-npm-signer" target="_blank">GitHub Repository</a></li>
+          <li><a href="https://www.npmjs.com/package/sigstore-npm-signer" target="_blank">npm Package</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content">
+      <h1>sigstore-npm-signer Documentation</h1>
+      
+      <section id="usage">
+        <h2>Usage</h2>
+        
+        <h3>Signing a Package</h3>
+        <p>The <code>publish</code> command signs your npm package tarball and updates the package.json with the signature:</p>
+        <pre><code># Sign and publish a package using the default tarball path
+npx sigstore-npm-signer publish
+
+# Specify a custom tarball path
+npx sigstore-npm-signer publish --tarball your-package-1.0.0.tgz
+
+# Specify custom Sigstore service URLs
+npx sigstore-npm-signer publish --fulcio-url https://custom-fulcio.example.com --rekor-url https://custom-rekor.example.com</code></pre>
+        
+        <h3>Verifying a Package</h3>
+        <p>The <code>verify</code> command verifies the signature of an npm package:</p>
+        <pre><code># Verify a package using the default tarball path
+npx sigstore-npm-signer verify
+
+# Specify a custom tarball path
+npx sigstore-npm-signer verify --tarball your-package-1.0.0.tgz
+
+# Specify custom Sigstore service URLs
+npx sigstore-npm-signer verify --fulcio-url https://custom-fulcio.example.com --rekor-url https://custom-rekor.example.com</code></pre>
+        
+        <h3>Command Line Options</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Description</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--tarball</code></td>
+              <td>Path to the package tarball</td>
+              <td><code>{name}-{version}.tgz</code></td>
+            </tr>
+            <tr>
+              <td><code>--fulcio-url</code></td>
+              <td>URL of the Fulcio service</td>
+              <td>Sigstore default</td>
+            </tr>
+            <tr>
+              <td><code>--rekor-url</code></td>
+              <td>URL of the Rekor service</td>
+              <td>Sigstore default</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="configuration">
+        <h2>Configuration</h2>
+        <p>You can configure <code>sigstore-npm-signer</code> by creating a <code>.signerrc</code> file in your project root:</p>
+        
+        <pre><code>{
+  "allowedPublishers": ["github:username", "email@example.com"],
+  "enforceVerification": true,
+  "fulcioUrl": "https://fulcio.example.com",
+  "rekorUrl": "https://rekor.example.com"
+}</code></pre>
+        
+        <h3>Configuration Options</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Option</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>allowedPublishers</code></td>
+              <td><code>string[]</code></td>
+              <td>List of allowed publishers (GitHub usernames or email addresses)</td>
+              <td><code>[]</code></td>
+            </tr>
+            <tr>
+              <td><code>enforceVerification</code></td>
+              <td><code>boolean</code></td>
+              <td>Whether to enforce signature verification on install</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>fulcioUrl</code></td>
+              <td><code>string</code></td>
+              <td>Custom Fulcio URL</td>
+              <td>Sigstore default</td>
+            </tr>
+            <tr>
+              <td><code>rekorUrl</code></td>
+              <td><code>string</code></td>
+              <td>Custom Rekor URL</td>
+              <td>Sigstore default</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="api">
+        <h2>API Reference</h2>
+        
+        <h3>Signing</h3>
+        <p>The <code>signPackage</code> function signs a package tarball:</p>
+        <pre><code>import { signPackage } from 'sigstore-npm-signer';
+
+// Sign a package
+const signature = await signPackage({
+  tarballPath: 'your-package-1.0.0.tgz',
+  fulcioUrl: 'https://fulcio.example.com', // optional
+  rekorUrl: 'https://rekor.example.com'    // optional
+});</code></pre>
+        
+        <h4>Parameters</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>tarballPath</code></td>
+              <td><code>string</code></td>
+              <td>Path to the package tarball</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><code>fulcioUrl</code></td>
+              <td><code>string</code></td>
+              <td>URL of the Fulcio service</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td><code>rekorUrl</code></td>
+              <td><code>string</code></td>
+              <td>URL of the Rekor service</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h4>Returns</h4>
+        <p><code>Promise&lt;string&gt;</code> - The signature as a string</p>
+        
+        <h3>Attaching Signatures</h3>
+        <p>The <code>attachSignature</code> function attaches a signature to a package.json:</p>
+        <pre><code>import { attachSignature } from 'sigstore-npm-signer';
+
+// Attach a signature to a package.json
+await attachSignature(packageJson, signature);</code></pre>
+        
+        <h4>Parameters</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>packageJson</code></td>
+              <td><code>object</code></td>
+              <td>The package.json object</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><code>signature</code></td>
+              <td><code>string</code></td>
+              <td>The signature to attach</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h3>Verification</h3>
+        <p>The <code>verifyPackage</code> function verifies a package signature:</p>
+        <pre><code>import { verifyPackage } from 'sigstore-npm-signer';
+
+// Verify a package
+await verifyPackage({
+  tarballPath: 'your-package-1.0.0.tgz',
+  packageJson: packageJsonObject,
+  fulcioUrl: 'https://fulcio.example.com', // optional
+  rekorUrl: 'https://rekor.example.com'    // optional
+});</code></pre>
+        
+        <h4>Parameters</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Required</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>tarballPath</code></td>
+              <td><code>string</code></td>
+              <td>Path to the package tarball</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><code>packageJson</code></td>
+              <td><code>object</code></td>
+              <td>The package.json object containing the signature</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td><code>fulcioUrl</code></td>
+              <td><code>string</code></td>
+              <td>URL of the Fulcio service</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td><code>rekorUrl</code></td>
+              <td><code>string</code></td>
+              <td>URL of the Rekor service</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <h4>Returns</h4>
+        <p><code>Promise&lt;void&gt;</code> - Resolves if verification succeeds, rejects if it fails</p>
+      </section>
+
+      <section id="how-it-works">
+        <h2>How It Works</h2>
+        
+        <h3>Signing Process</h3>
+        <ol>
+          <li>The package tarball is hashed using SHA-256</li>
+          <li>The hash is signed using Sigstore's keyless signing infrastructure</li>
+          <li>The signature is attached to the package.json file</li>
+        </ol>
+        
+        <p>The signing process uses Sigstore's OIDC-based keyless signing, which means you don't need to manage any private keys. Instead, Sigstore uses your identity (e.g., GitHub identity) to issue a short-lived certificate that's used for signing.</p>
+        
+        <h3>Verification Process</h3>
+        <ol>
+          <li>The package tarball is hashed using SHA-256</li>
+          <li>The signature from package.json is verified against the hash</li>
+          <li>The verification uses Sigstore's transparency log to ensure authenticity</li>
+        </ol>
+        
+        <p>The verification process checks that the package was signed by an authorized publisher and that the package hasn't been tampered with since it was signed.</p>
+      </section>
+
+      <section id="development">
+        <h2>Development</h2>
+        
+        <h3>Setup</h3>
+        <pre><code># Clone the repository
+git clone https://github.com/yourusername/sigstore-npm-signer.git
+cd sigstore-npm-signer
+
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Run tests
+npm test</code></pre>
+        
+        <h3>Testing</h3>
+        <p>The project uses Jest for testing and maintains 100% code coverage:</p>
+        <pre><code>npm test</code></pre>
+        
+        <h3>Contributing</h3>
+        <p>Contributions are welcome! Please feel free to submit a Pull Request.</p>
+        <ol>
+          <li>Fork the repository</li>
+          <li>Create your feature branch (<code>git checkout -b feature/amazing-feature</code>)</li>
+          <li>Commit your changes (<code>git commit -m 'Add some amazing feature'</code>)</li>
+          <li>Push to the branch (<code>git push origin feature/amazing-feature</code>)</li>
+          <li>Open a Pull Request</li>
+        </ol>
+      </section>
+
+      <footer class="footer">
+        <p>sigstore-npm-signer is licensed under the <a href="https://opensource.org/licenses/Apache-2.0" target="_blank">Apache License 2.0</a>.</p>
+        <p>© 2023 sigstore-npm-signer Contributors</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Simple script to highlight the active section in the sidebar
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.sidebar-nav a');
+      
+      function highlightNavigation() {
+        const scrollPosition = window.scrollY;
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+      
+      window.addEventListener('scroll', highlightNavigation);
+      highlightNavigation();
+    });
+  </script>
+</body>
+</html>
