@@ -1,0 +1,52 @@
+{
+  "name": "sigstore-npm-signer",
+  "version": "1.0.0",
+  "description": "Sign and verify npm packages using Sigstore",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "bin": {
+    "sigstore-npm-signer": "dist/bin/sigstore-npm-signer.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "install:fast": "npm ci --prefer-offline --no-audit",
+    "install:clean": "npm ci --no-cache --no-audit"
+  },
+  "keywords": [
+    "sigstore",
+    "npm",
+    "security",
+    "signing",
+    "verification",
+    "supply-chain"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "@sigstore/sign": "^1.0.0",
+    "commander": "^11.1.0",
+    "cosmiconfig": "^8.3.6",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@sigstore/mock": "^0.7.0",
+    "@types/jest": "^29.5.5",
+    "@types/node": "^18.17.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ]
+}
